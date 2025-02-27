@@ -11,6 +11,7 @@ import { iconItem } from './elements/icon';
 import { metricValueItem } from './elements/metricValue';
 import { parallelogramItem } from './elements/parallelogram';
 import { rectangleItem } from './elements/rectangle';
+import { roundedQuarterItem } from './elements/security-lane/roundedQuarter';
 import { serverItem } from './elements/server/server';
 import { textItem } from './elements/text';
 import { triangleItem } from './elements/triangle';
@@ -35,7 +36,14 @@ export const defaultElementItems = [
   parallelogramItem,
 ];
 
-export const advancedElementItems = [buttonItem, windTurbineItem, droneTopItem, droneFrontItem, droneSideItem];
+export const advancedElementItems = [
+  buttonItem,
+  windTurbineItem,
+  droneTopItem,
+  droneFrontItem,
+  droneSideItem,
+  roundedQuarterItem,
+];
 
 export const canvasElementRegistry = new Registry<CanvasElementItem>(() => [
   ...defaultElementItems,
