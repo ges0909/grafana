@@ -16,7 +16,7 @@ import {
 } from '../../element';
 import { Align, CanvasElementConfig, CanvasElementData, VAlign } from '../../types';
 
-const RoundedQuarter = (props: CanvasElementProps<CanvasElementConfig, CanvasElementData>) => {
+const Halbrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElementData>) => {
   const { data } = props;
   const styles = getStyles(config.theme2, data);
 
@@ -38,7 +38,7 @@ const RoundedQuarter = (props: CanvasElementProps<CanvasElementConfig, CanvasEle
             <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="300" height="300" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
-            <path d="M 0 0 A 200 200 0 0 1 200 200 H 100 A 100 100 0 0 0 0 100 Z" />
+            <path d="M 100 0 A 100 100 0 0 1 100 200 V 150 A 50 50 0 0 0 100 50 Z" />
           </clipPath>
         </defs>
 
@@ -46,13 +46,13 @@ const RoundedQuarter = (props: CanvasElementProps<CanvasElementConfig, CanvasEle
         <rect x="0" y="0" width="100%" height="100%" clipPath={`url(#clip-${uniqueId})`} style={{ fill: 'none' }} />
 
         <path
-          d="M 0 0 A 200 200 0 0 1 200 200 H 100 A 100 100 0 0 0 0 100 Z"
+          d="M 100 0 A 100 100 0 0 1 100 200 V 150 A 50 50 0 0 0 100 50 Z"
           style={{ fill: data?.backgroundImage ? `url(#image-${uniqueId})` : data?.backgroundColor }}
         />
 
         {/* Border */}
         <path
-          d="M 0 0 A 200 200 0 0 1 200 200 H 100 A 100 100 0 0 0 0 100 Z"
+          d="M 100 0 A 100 100 0 0 1 100 200 V 150 A 50 50 0 0 0 100 50 Z"
           clipPath={`url(#clip-${uniqueId})`}
           className={styles.elementBorder}
         />
@@ -62,12 +62,12 @@ const RoundedQuarter = (props: CanvasElementProps<CanvasElementConfig, CanvasEle
   );
 };
 
-export const roundedQuarterItem: CanvasElementItem<CanvasElementConfig, CanvasElementData> = {
-  id: 'roundedQuarter',
-  name: 'Security Lane - Rounded Quarter',
-  description: 'Security Lane - Rounded Quarter',
+export const halbrundItem: CanvasElementItem<CanvasElementConfig, CanvasElementData> = {
+  id: 'halbrund',
+  name: 'Security Lane - halbrund',
+  description: 'Baustein für Security Lane',
 
-  display: RoundedQuarter,
+  display: Halbrund,
 
   defaultSize: {
     width: 200,
@@ -124,7 +124,7 @@ export const roundedQuarterItem: CanvasElementItem<CanvasElementConfig, CanvasEl
   },
 
   registerOptionsUI: (builder) => {
-    const category = ['Security Lane - Rounded Quarter'];
+    const category = ['Lane/halbrund'];
     builder
       .addCustomEditor({
         category,
@@ -178,7 +178,10 @@ export const roundedQuarterItem: CanvasElementItem<CanvasElementConfig, CanvasEl
       });
   },
 
-  customConnectionAnchors: [],
+  customConnectionAnchors: [
+    { x: -1, y: 0 }, // Middle Left
+    { x: 1, y: 0 }, // Middle Right
+  ],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {

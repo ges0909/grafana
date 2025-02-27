@@ -45,6 +45,7 @@ export const SVGElements = new Set<string>([
   'halbrund',
   'viertelrund',
   'achtelrund',
+  'weiche',
 ]);
 
 export class ElementState implements LayerElement {

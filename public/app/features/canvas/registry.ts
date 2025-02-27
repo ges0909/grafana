@@ -6,16 +6,17 @@ import { cloudItem } from './elements/cloud';
 import { droneFrontItem } from './elements/droneFront';
 import { droneSideItem } from './elements/droneSide';
 import { droneTopItem } from './elements/droneTop';
+import { achtelrundItem } from './elements/electora/achtelRund';
+import { halbrundItem } from './elements/electora/halbRund';
+import { senkrechtItem } from './elements/electora/senkrecht';
+import { viertelrundItem } from './elements/electora/viertelRund';
+import { waagerechtItem } from './elements/electora/waagerecht';
+import { weicheItem } from './elements/electora/weiche';
 import { ellipseItem } from './elements/ellipse';
 import { iconItem } from './elements/icon';
 import { metricValueItem } from './elements/metricValue';
 import { parallelogramItem } from './elements/parallelogram';
 import { rectangleItem } from './elements/rectangle';
-import { waagerechtItem } from './elements/security-lane/waagerecht';
-import { senkrechtItem } from './elements/security-lane/senkrecht';
-import { halbrundItem } from './elements/security-lane/halbRund';
-import { viertelrundItem } from './elements/security-lane/viertelRund';
-import { achtelrundItem } from './elements/security-lane/achtelRund';
 import { serverItem } from './elements/server/server';
 import { textItem } from './elements/text';
 import { triangleItem } from './elements/triangle';
@@ -51,6 +52,7 @@ export const advancedElementItems = [
   halbrundItem,
   viertelrundItem,
   achtelrundItem,
+  weicheItem,
 ];
 
 export const canvasElementRegistry = new Registry<CanvasElementItem>(() => [

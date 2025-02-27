@@ -16,7 +16,7 @@ import {
 } from '../../element';
 import { Align, CanvasElementConfig, CanvasElementData, VAlign } from '../../types';
 
-const Waagerecht = (props: CanvasElementProps<CanvasElementConfig, CanvasElementData>) => {
+const Weiche = (props: CanvasElementProps<CanvasElementConfig, CanvasElementData>) => {
   const { data } = props;
   const styles = getStyles(config.theme2, data);
 
@@ -38,7 +38,7 @@ const Waagerecht = (props: CanvasElementProps<CanvasElementConfig, CanvasElement
             <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="300" height="300" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
-            <path d="M 0 75 H 200 V 125 H 0 Z" />
+            <path d="M 0 100 H 50 L 150 0 H 200 V 50 H 175 L 125 100 H 200 V 150 H 0 Z" />
           </clipPath>
         </defs>
 
@@ -46,24 +46,28 @@ const Waagerecht = (props: CanvasElementProps<CanvasElementConfig, CanvasElement
         <rect x="0" y="0" width="100%" height="100%" clipPath={`url(#clip-${uniqueId})`} style={{ fill: 'none' }} />
 
         <path
-          d="M 0 75 H 200 V 125 H 0 Z"
+          d="M 0 100 H 50 L 150 0 H 200 V 50 H 175 L 125 100 H 200 V 150 H 0 Z"
           style={{ fill: data?.backgroundImage ? `url(#image-${uniqueId})` : data?.backgroundColor }}
         />
 
         {/* Border */}
-        <path d="M 0 75 H 200 V 125 H 0 Z" clipPath={`url(#clip-${uniqueId})`} className={styles.elementBorder} />
+        <path
+          d="M 0 100 H 50 L 150 0 H 200 V 50 H 175 L 125 100 H 200 V 150 H 0 Z"
+          clipPath={`url(#clip-${uniqueId})`}
+          className={styles.elementBorder}
+        />
       </svg>
       <span className={styles.text}>{data?.text}</span>
     </div>
   );
 };
 
-export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElementData> = {
-  id: 'waagerecht',
-  name: 'Security Lane - waagerecht',
+export const weicheItem: CanvasElementItem<CanvasElementConfig, CanvasElementData> = {
+  id: 'weiche',
+  name: 'Security Lane - Weiche',
   description: 'Baustein für Security Lane',
 
-  display: Waagerecht,
+  display: Weiche,
 
   defaultSize: {
     width: 200,
@@ -120,7 +124,7 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
   },
 
   registerOptionsUI: (builder) => {
-    const category = ['Lane/waagerecht'];
+    const category = ['Lane/Weiche'];
     builder
       .addCustomEditor({
         category,
@@ -174,7 +178,10 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
       });
   },
 
-  customConnectionAnchors: [],
+  customConnectionAnchors: [
+    { x: -1, y: 0 }, // Middle Left
+    { x: 1, y: 0 }, // Middle Right
+  ],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {

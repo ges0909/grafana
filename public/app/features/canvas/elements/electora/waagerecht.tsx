@@ -16,7 +16,7 @@ import {
 } from '../../element';
 import { Align, CanvasElementConfig, CanvasElementData, VAlign } from '../../types';
 
-const Halbrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElementData>) => {
+const Waagerecht = (props: CanvasElementProps<CanvasElementConfig, CanvasElementData>) => {
   const { data } = props;
   const styles = getStyles(config.theme2, data);
 
@@ -38,7 +38,7 @@ const Halbrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElementDa
             <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="300" height="300" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
-            <path d="M 100 0 A 100 100 0 0 1 100 200 V 150 A 50 50 0 0 0 100 50 Z" />
+            <path d="M 0 75 H 200 V 125 H 0 Z" />
           </clipPath>
         </defs>
 
@@ -46,28 +46,24 @@ const Halbrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElementDa
         <rect x="0" y="0" width="100%" height="100%" clipPath={`url(#clip-${uniqueId})`} style={{ fill: 'none' }} />
 
         <path
-          d="M 100 0 A 100 100 0 0 1 100 200 V 150 A 50 50 0 0 0 100 50 Z"
+          d="M 0 75 H 200 V 125 H 0 Z"
           style={{ fill: data?.backgroundImage ? `url(#image-${uniqueId})` : data?.backgroundColor }}
         />
 
         {/* Border */}
-        <path
-          d="M 100 0 A 100 100 0 0 1 100 200 V 150 A 50 50 0 0 0 100 50 Z"
-          clipPath={`url(#clip-${uniqueId})`}
-          className={styles.elementBorder}
-        />
+        <path d="M 0 75 H 200 V 125 H 0 Z" clipPath={`url(#clip-${uniqueId})`} className={styles.elementBorder} />
       </svg>
       <span className={styles.text}>{data?.text}</span>
     </div>
   );
 };
 
-export const halbrundItem: CanvasElementItem<CanvasElementConfig, CanvasElementData> = {
-  id: 'halbrund',
-  name: 'Security Lane - halbrund',
+export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElementData> = {
+  id: 'waagerecht',
+  name: 'Security Lane - waagerecht',
   description: 'Baustein für Security Lane',
 
-  display: Halbrund,
+  display: Waagerecht,
 
   defaultSize: {
     width: 200,
@@ -124,7 +120,7 @@ export const halbrundItem: CanvasElementItem<CanvasElementConfig, CanvasElementD
   },
 
   registerOptionsUI: (builder) => {
-    const category = ['Lane/halbrund'];
+    const category = ['Lane/waagerecht'];
     builder
       .addCustomEditor({
         category,
@@ -178,7 +174,10 @@ export const halbrundItem: CanvasElementItem<CanvasElementConfig, CanvasElementD
       });
   },
 
-  customConnectionAnchors: [],
+  customConnectionAnchors: [
+    { x: -1, y: 0 }, // Middle Left
+    { x: 1, y: 0 }, // Middle Right
+  ],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {
