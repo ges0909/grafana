@@ -8,7 +8,6 @@ import { droneSideItem } from './elements/droneSide';
 import { droneTopItem } from './elements/droneTop';
 import { achtelrundItem } from './elements/electora/achtelRund';
 import { halbrundItem } from './elements/electora/halbRund';
-import { senkrechtItem } from './elements/electora/senkrecht';
 import { viertelrundItem } from './elements/electora/viertelRund';
 import { waagerechtItem } from './elements/electora/waagerecht';
 import { weicheItem } from './elements/electora/weiche';
@@ -48,7 +47,6 @@ export const advancedElementItems = [
   droneFrontItem,
   droneSideItem,
   waagerechtItem,
-  senkrechtItem,
   halbrundItem,
   viertelrundItem,
   achtelrundItem,

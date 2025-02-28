@@ -178,10 +178,7 @@ export const halbrundItem: CanvasElementItem<CanvasElementConfig, CanvasElementD
       });
   },
 
-  customConnectionAnchors: [
-    { x: -1, y: 0 }, // Middle Left
-    { x: 1, y: 0 }, // Middle Right
-  ],
+  customConnectionAnchors: [],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {

@@ -178,10 +178,7 @@ export const weicheItem: CanvasElementItem<CanvasElementConfig, CanvasElementDat
       });
   },
 
-  customConnectionAnchors: [
-    { x: -1, y: 0 }, // Middle Left
-    { x: 1, y: 0 }, // Middle Right
-  ],
+  customConnectionAnchors: [],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {

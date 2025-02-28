@@ -41,7 +41,6 @@ export const SVGElements = new Set<string>([
   'cloud',
   'ellipse',
   'waagerecht',
-  'senkrecht',
   'halbrund',
   'viertelrund',
   'achtelrund',
