@@ -40,12 +40,20 @@ export const defaultElementItems = [
   parallelogramItem,
 ];
 
-export const advancedElementItems = [buttonItem, windTurbineItem, droneTopItem, droneFrontItem, droneSideItem];
-
-export const electoraElementTypes = [waagerechtItem, halbrundItem, viertelrundItem, achtelrundItem, weicheItem];
+export const advancedElementItems = [
+  buttonItem,
+  windTurbineItem,
+  droneTopItem,
+  droneFrontItem,
+  droneSideItem,
+  waagerechtItem,
+  halbrundItem,
+  viertelrundItem,
+  achtelrundItem,
+  weicheItem,
+];
 
 export const canvasElementRegistry = new Registry<CanvasElementItem>(() => [
   ...defaultElementItems,
   ...advancedElementItems,
-  ...electoraElementTypes,
 ]);
