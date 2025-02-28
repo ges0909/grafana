@@ -35,7 +35,7 @@ const Halbrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElementDa
         {/* Define clipping area (the shape) */}
         <defs>
           <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="100" height="200">
-            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="150" height="250" />
+            <image xlinkHref={data?.backgroundImage} x="-100" y="-100" width="300" height="400" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
             <path d="M 0 0 A 100 100 0 0 1 0 200 V 150 A 50 50 0 0 0 0 50 Z" />

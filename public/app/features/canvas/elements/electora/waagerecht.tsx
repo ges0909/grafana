@@ -35,7 +35,7 @@ const Waagerecht = (props: CanvasElementProps<CanvasElementConfig, CanvasElement
         {/* Define clipping area (the shape) */}
         <defs>
           <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="200" height="50">
-            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="250" height="100" />
+            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="300" height="200" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
             <rect width="200" height="50" />

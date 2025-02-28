@@ -6,7 +6,7 @@ import { cloudItem } from './elements/cloud';
 import { droneFrontItem } from './elements/droneFront';
 import { droneSideItem } from './elements/droneSide';
 import { droneTopItem } from './elements/droneTop';
-import { achtelrundItem } from './elements/electora/achtelRund';
+import { achtelrundItem } from './elements/electora/achtelrund';
 import { halbrundItem } from './elements/electora/halbrund';
 import { viertelrundItem } from './elements/electora/viertelrund';
 import { waagerechtItem } from './elements/electora/waagerecht';

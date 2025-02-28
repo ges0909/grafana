@@ -35,7 +35,7 @@ const Viertelrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElemen
         {/* Define clipping area (the shape) */}
         <defs>
           <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="100" height="100">
-            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="150" height="150" />
+            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="200" height="200" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
             <path d="M 0 0 A 100 100 0 0 1 100 100 H 50 A 50 50 0 0 0 0 50 Z" />
