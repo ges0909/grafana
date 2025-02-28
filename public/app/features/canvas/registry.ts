@@ -7,7 +7,7 @@ import { droneFrontItem } from './elements/droneFront';
 import { droneSideItem } from './elements/droneSide';
 import { droneTopItem } from './elements/droneTop';
 import { achtelrundItem } from './elements/electora/achtelRund';
-import { halbrundItem } from './elements/electora/halbRund';
+import { halbrundItem } from './elements/electora/halbrund';
 import { viertelrundItem } from './elements/electora/viertelRund';
 import { waagerechtItem } from './elements/electora/waagerecht';
 import { weicheItem } from './elements/electora/weiche';

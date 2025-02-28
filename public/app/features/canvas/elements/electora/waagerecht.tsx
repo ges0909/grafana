@@ -121,7 +121,7 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
   },
 
   registerOptionsUI: (builder) => {
-    const category = ['Lane/waagerecht'];
+    const category = ['waagerecht'];
     builder
       .addCustomEditor({
         category,
@@ -176,10 +176,7 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
   },
 
   customConnectionAnchors: [
-    { x: 0, y: -1 }, // Top Middle
-    { x: 1, y: 0 }, // Right Middle
-    { x: 0, y: 1 }, // Bottom Middle
-    { x: -1, y: 0 }, // Left Middle
+    { x: 0, y: 0 }, // Dummy connection point for correct rendering in canvas editor
   ],
 };
 
