@@ -27,31 +27,32 @@ const Waagerecht = (props: CanvasElementProps<CanvasElementConfig, CanvasElement
     <div className={styles.container}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 200 200"
+        viewBox="0 0 200 50"
         width="100%"
         height="100%"
         preserveAspectRatio="none"
       >
         {/* Define clipping area (the shape) */}
         <defs>
-          <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="200" height="200">
-            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="300" height="300" />
+          <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="200" height="50">
+            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="250" height="100" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
-            <path d="M 0 75 H 200 V 125 H 0 Z" />
+            <rect width="200" height="50" />
           </clipPath>
         </defs>
 
         {/* Apply background image within the clipping area */}
         <rect x="0" y="0" width="100%" height="100%" clipPath={`url(#clip-${uniqueId})`} style={{ fill: 'none' }} />
 
-        <path
-          d="M 0 75 H 200 V 125 H 0 Z"
+        <rect
+          width="200"
+          height="50"
           style={{ fill: data?.backgroundImage ? `url(#image-${uniqueId})` : data?.backgroundColor }}
         />
 
         {/* Border */}
-        <path d="M 0 75 H 200 V 125 H 0 Z" clipPath={`url(#clip-${uniqueId})`} className={styles.elementBorder} />
+        <rect width="200" height="50" clipPath={`url(#clip-${uniqueId})`} className={styles.elementBorder} />
       </svg>
       <span className={styles.text}>{data?.text}</span>
     </div>
@@ -67,7 +68,7 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
 
   defaultSize: {
     width: 200,
-    height: 200,
+    height: 50,
   },
 
   getNewOptions: (options) => ({
@@ -86,7 +87,7 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
     },
     placement: {
       width: options?.placement?.width ?? 200,
-      height: options?.placement?.height ?? 200,
+      height: options?.placement?.height ?? 50,
       top: options?.placement?.top,
       left: options?.placement?.left,
       rotation: options?.placement?.rotation ?? 0,
@@ -174,7 +175,12 @@ export const waagerechtItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
       });
   },
 
-  customConnectionAnchors: [],
+  customConnectionAnchors: [
+    { x: 0, y: -1 }, // Top Middle
+    { x: 1, y: 0 }, // Right Middle
+    { x: 0, y: 1 }, // Bottom Middle
+    { x: -1, y: 0 }, // Left Middle
+  ],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {
