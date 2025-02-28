@@ -27,18 +27,18 @@ const Viertelrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElemen
     <div className={styles.container}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 200 200"
+        viewBox="0 0 100 100"
         width="100%"
         height="100%"
         preserveAspectRatio="none"
       >
         {/* Define clipping area (the shape) */}
         <defs>
-          <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="200" height="200">
-            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="300" height="300" />
+          <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="100" height="100">
+            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="150" height="150" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
-            <path d="M 100 0 A 100 100 0 0 1 200 100 H 150  A 50 50 0 0 0 100 50 Z" />
+            <path d="M 0 0 A 100 100 0 0 1 100 100 H 50 A 50 50 0 0 0 0 50 Z" />
           </clipPath>
         </defs>
 
@@ -46,13 +46,13 @@ const Viertelrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElemen
         <rect x="0" y="0" width="100%" height="100%" clipPath={`url(#clip-${uniqueId})`} style={{ fill: 'none' }} />
 
         <path
-          d="M 100 0 A 100 100 0 0 1 200 100 H 150  A 50 50 0 0 0 100 50 Z"
+          d="M 0 0 A 100 100 0 0 1 100 100 H 50 A 50 50 0 0 0 0 50 Z"
           style={{ fill: data?.backgroundImage ? `url(#image-${uniqueId})` : data?.backgroundColor }}
         />
 
         {/* Border */}
         <path
-          d="M 100 0 A 100 100 0 0 1 200 100 H 150  A 50 50 0 0 0 100 50 Z"
+          d="M 0 0 A 100 100 0 0 1 100 100 H 50 A 50 50 0 0 0 0 50 Z"
           clipPath={`url(#clip-${uniqueId})`}
           className={styles.elementBorder}
         />
@@ -70,8 +70,8 @@ export const viertelrundItem: CanvasElementItem<CanvasElementConfig, CanvasEleme
   display: Viertelrund,
 
   defaultSize: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
   },
 
   getNewOptions: (options) => ({
@@ -89,8 +89,8 @@ export const viertelrundItem: CanvasElementItem<CanvasElementConfig, CanvasEleme
       },
     },
     placement: {
-      width: options?.placement?.width ?? 200,
-      height: options?.placement?.height ?? 200,
+      width: options?.placement?.width ?? 100,
+      height: options?.placement?.height ?? 100,
       top: options?.placement?.top,
       left: options?.placement?.left,
       rotation: options?.placement?.rotation ?? 0,
@@ -124,7 +124,7 @@ export const viertelrundItem: CanvasElementItem<CanvasElementConfig, CanvasEleme
   },
 
   registerOptionsUI: (builder) => {
-    const category = ['Lane/viertelrund'];
+    const category = ['viertelrund'];
     builder
       .addCustomEditor({
         category,
@@ -178,7 +178,9 @@ export const viertelrundItem: CanvasElementItem<CanvasElementConfig, CanvasEleme
       });
   },
 
-  customConnectionAnchors: [],
+  customConnectionAnchors: [
+    { x: 0, y: 0 }, // Dummy connection point for correct rendering in canvas editor
+  ],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {
