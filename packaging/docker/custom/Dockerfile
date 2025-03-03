@@ -62,3 +62,4 @@ RUN if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then \
         fi \
       done \
     fi
+
