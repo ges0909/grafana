@@ -27,18 +27,18 @@ const Achtelrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElement
     <div className={styles.container}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 70.7 64.7"
+        viewBox="0 0 70.7 64.6"
         width="100%"
         height="100%"
         preserveAspectRatio="none"
       >
         {/* Define clipping area (the shape) */}
         <defs>
-          <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="70.7" height="64.7">
-            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="170.7" height="164.7" />
+          <pattern id={`image-${uniqueId}`} patternUnits="userSpaceOnUse" width="70.7" height="64.6">
+            <image xlinkHref={data?.backgroundImage} x="-50" y="-50" width="170.7" height="164.6" />
           </pattern>
           <clipPath id={`clip-${uniqueId}`}>
-            <path d="M 0 50 V 0 A 100 100 0 0 1 70.7 29.3 L 35.4 64.7 A 50 50 0 0 0 0 50 Z" />
+            <path d="M 0 50 L 0 0 A 100 100 0 0 1 70.7 29.3 L 35.4 64.6 A 50 50 0 0 0 0 50 Z" />
           </clipPath>
         </defs>
 
@@ -46,13 +46,13 @@ const Achtelrund = (props: CanvasElementProps<CanvasElementConfig, CanvasElement
         <rect x="0" y="0" width="100%" height="100%" clipPath={`url(#clip-${uniqueId})`} style={{ fill: 'none' }} />
 
         <path
-          d="M 0 50 V 0 A 100 100 0 0 1 70.7 29.3 L 35.4 64.7 A 50 50 0 0 0 0 50 Z"
+          d="M 0 50 L 0 0 A 100 100 0 0 1 70.7 29.3 L 35.4 64.6 A 50 50 0 0 0 0 50 Z"
           style={{ fill: data?.backgroundImage ? `url(#image-${uniqueId})` : data?.backgroundColor }}
         />
 
         {/* Border */}
         <path
-          d="M 0 50 V 0 A 100 100 0 0 1 70.7 29.3 L 35.4 64.7 A 50 50 0 0 0 0 50 Z"
+          d="M 0 50 L 0 0 A 100 100 0 0 1 70.7 29.3 L 35.4 64.6 A 50 50 0 0 0 0 50 Z"
           clipPath={`url(#clip-${uniqueId})`}
           className={styles.elementBorder}
         />
@@ -71,7 +71,7 @@ export const achtelrundItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
 
   defaultSize: {
     width: 70.7,
-    height: 64.7,
+    height: 64.6,
   },
 
   getNewOptions: (options) => ({
@@ -90,7 +90,7 @@ export const achtelrundItem: CanvasElementItem<CanvasElementConfig, CanvasElemen
     },
     placement: {
       width: options?.placement?.width ?? 70.7,
-      height: options?.placement?.height ?? 64.7,
+      height: options?.placement?.height ?? 64.6,
       top: options?.placement?.top,
       left: options?.placement?.left,
       rotation: options?.placement?.rotation ?? 0,
