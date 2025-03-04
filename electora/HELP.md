@@ -1,92 +1,152 @@
 # How to write canvas custom elements
 
-## References
+## Ref
 
 - [Pizzeria observability on Grafana Canvas panel](https://volkovlabs.io/blog/pizzeria-canvas-20230723/)
 - [Grafana Developer Guide](https://github.com/grafana/grafana/blob/main/contribute/developer-guide.md)
 
-## Prerequisites
+## Build and run
 
-Build on WSL only.
+1. On Windows use WSL only
+2. Check prerequisites
 
-```shell
-sudo apt install git -y
-git version
-#
-sudo apt install golang-go
-go version
-#
-sudo apt install nodejs npm
-node --version
-npm --version
-#
-sudo apt install build-essential
-gcc --version
-```
+   ```shell
+   sudo apt install git -y
+   git version
+   #
+   sudo apt install golang-go
+   go version
+   #
+   sudo apt install nodejs npm
+   node --version
+   npm --version
+   #
+   sudo apt install build-essential
+   gcc --version
+   ```
+   
+3. Clone repo
 
-## Clone repo
+   ```shell
+   git clone https://github.com/grafana/grafana.git
+   # make lefthook-install
+   # make lefthook-uninstall
+   ```
 
-```shell
-git clone https://github.com/grafana/grafana.git
-# make lefthook-install
-# make lefthook-uninstall
-cd grafana
-```
+4. Build and run frontend
 
-## Build and run frontend
+   ```shell
+   cd grafana
+   yarn install --immutable
+   yarn start
+   ```
 
-```shell
-yarn install --immutable
-yarn start
-```
+5. Build and run backend
 
-## Build and run backend
+   ```shell
+   make run
+   ```
 
-```shell
-make run
-```
+6. Navigating to `http://localhost:3000` and login as `admin`/`admin`
 
-Test by navigating to `http://localhost:3000` (admin/admin).
+## Add canvas custom elements and create patch
+   
+1. Add new `tsx` components to `public/app/features/canvas/elements/`
+2. Register component id's in `public/app/features/canvas/registry.ts`
+3. Add component id's to `SVGElements` in `public/app/features/canvas/runtime/elements.tsx`
+4. Check git status
 
-## Add canvas custom elements
+   ```shell
+   ~/grafana (feature/canvas-custom-elements*) $ git status
+   On branch feature/canvas-custom-elements
+   Changes to be committed:
+     (use "git restore --staged <file>..." to unstage)
+           new file:   public/app/features/canvas/elements/electora/achtelrund.tsx
+           new file:   public/app/features/canvas/elements/electora/halbrund.tsx
+           new file:   public/app/features/canvas/elements/electora/viertelrund.tsx
+           new file:   public/app/features/canvas/elements/electora/waagerecht.tsx
+           new file:   public/app/features/canvas/elements/electora/weiche.tsx
+           modified:   public/app/features/canvas/registry.ts
+           modified:   public/app/features/canvas/runtime/element.tsx
+   ```
 
-### Modify
+5. Commit changes
 
-1. Checkout specific version: `git checkout tags/v11.5.2 -b feature/canvas-custom-elements`
-2. Add new `tsx` components to `public/app/features/canvas/elements/`
-3. Register components id's in `public/app/features/canvas/registry.ts`
-4. Add component id's to `SVGElements` in `public/app/features/canvas/runtime/elements.tsx`
+   ```shell
+   git commit -m "Electora canvas custom elements"
+   ```
+   
+6. Create patch for last commit
 
-Example:
+   ```shell
+   git format-patch -1
+   ```
 
-```shell
-~/grafana (feature/canvas-custom-elements*) $ git status
-On branch feature/canvas-custom-elements
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        new file:   public/app/features/canvas/elements/electora/achtelrund.tsx
-        new file:   public/app/features/canvas/elements/electora/halbrund.tsx
-        new file:   public/app/features/canvas/elements/electora/viertelrund.tsx
-        new file:   public/app/features/canvas/elements/electora/waagerecht.tsx
-        new file:   public/app/features/canvas/elements/electora/weiche.tsx
-        modified:   public/app/features/canvas/registry.ts
-        modified:   public/app/features/canvas/runtime/element.tsx
-```
+7. Check patch
 
-### Create patch
+   ```shell
+   git apply --check 0001-Electora-canvas-custom-elements.patch
+   ```
 
-```shell
-git commit -m "Electora canvas custom elements added"
-git format-patch -1
-#
-git diff --cached > canvas-custom-elements.diff
-```
+## Apply patch
 
-### Apply patch
+1. Checkout specific grafana version
 
-```shell
-git apply --check 0001-Electora-canvas-custom-elements-added.patch
-```
+   ```shell
+   git checkout tags/v11.5.2 -b feature/apply-electora-patch
+   ```
+
+2. Check patch before apply
+
+   ```shell
+   git apply --check 0001-Electora-canvas-custom-elements.patch
+   ```
+   
+3. Apply patch
+
+   ```shell
+   git apply --check 0001-Electora-canvas-custom-elements.patch
+   ```
+
+4. Check git status
+
+   ```shell
+   ~/grafana (feature/apply-electora-patch*) $ git status
+   On branch feature/apply-electora-patch
+   Changes not staged for commit:
+   (use "git add <file>..." to update what will be committed)
+   (use "git restore <file>..." to discard changes in working directory)
+   modified:   public/app/features/canvas/registry.ts
+   modified:   public/app/features/canvas/runtime/element.tsx
+   
+   Untracked files:
+   (use "git add <file>..." to include in what will be committed)
+   public/app/features/canvas/elements/electora/
+   
+   no changes added to commit (use "git add" and/or "git commit -a")
+   ```
+5. Test patch
+
+## Build docker image
+
+1. Change working dir
+
+   ```shell
+   cd packaging/docker/custom/
+   ```
+
+2. Build custom image
+
+   ```shell
+   export GRAFANA_VERSION=11.5.2
+   docker build --build-arg "GRAFANA_VERSION=latest" -t grafana-electora .
+   ```
+
+3. Run custom image
+
+   ```shell
+   docker run -d -p 3000:3000 --name=grafana grafana-electora
+   ```
 
 ## Maintain canvas custom elements
 
@@ -143,24 +203,3 @@ docker build \
 -t grafana-electora -f Dockerfile
 ```
 
-###
-
-~/grafana (main) $ git checkout v11.5.2
-Note: switching to 'v11.5.2'.
-
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by switching back to a branch.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -c with the switch command. Example:
-
-git switch -c <new-branch-name>
-
-Or undo this operation with:
-
-git switch -
-
-Turn off this advice by setting config variable advice.detachedHead to false
-
-HEAD is now at 598e0338d53 apply security patch: release-11.5.2/317-202502130459.patch
