@@ -127,7 +127,7 @@
    ```
 5. Test patch
 
-## Build docker image
+## Build custom docker image
 
 1. Change working dir
 
@@ -135,18 +135,20 @@
    cd packaging/docker/custom/
    ```
 
-2. Build custom image
+2. Build image
 
    ```shell
-   export GRAFANA_VERSION=11.5.2
-   docker build --build-arg "GRAFANA_VERSION=latest" -t grafana-electora .
+   docker build --build-arg "GRAFANA_VERSION=11.5.2" -t grafana-electora -f Electora.dockerfile .
    ```
 
-3. Run custom image
+3. Run image
 
    ```shell
    docker run -d -p 3000:3000 --name=grafana grafana-electora
    ```
+
+4. Test image
+
 
 ## Maintain canvas custom elements
 
