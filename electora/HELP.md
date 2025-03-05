@@ -11,18 +11,21 @@
 2. Check prerequisites
 
    ```shell
-   sudo apt install git -y
    git version
-   #
-   sudo apt install golang-go
+   # sudo apt install git -y
+   
    go version
-   #
-   sudo apt install nodejs npm
+   # sudo apt install golang-go
+   
    node --version
    npm --version
-   #
-   sudo apt install build-essential
+   # sudo apt install nodejs npm
+   
    gcc --version
+   # sudo apt install build-essential
+   
+   yarn --version
+   # sudo apt install --no-install-recommends yarn
    ```
    
 3. Clone repo
@@ -129,27 +132,49 @@
 
 ## Build custom docker image
 
-1. Change working dir
+1. Create `Electora.dockerfile` in `packaging/docker/custom/`
 
-   ```shell
-   cd packaging/docker/custom/
+   ```Dockerfile
+   ARG GRAFANA_VERSION
+   
+   FROM grafana/grafana:${GRAFANA_VERSION}
+   
+   COPY 0001-Electora-canvas-custom-elements.patch /tmp
+   
+   USER root
+   
+   RUN \
+     apk add --no-cache git && \
+     git apply /tmp/0001-Electora-canvas-custom-elements.patch && \
+     apk del git
+   
+   USER grafana
    ```
 
 2. Build image
 
    ```shell
-   docker build --build-arg "GRAFANA_VERSION=11.5.2" -t grafana-electora -f Electora.dockerfile .
+   docker build --build-arg "GRAFANA_VERSION=11.5.2" -t grafana-electora:11.5.2 -f packaging/docker/custom/Electora.dockerfile .
    ```
 
 3. Run image
 
    ```shell
-   docker run -d -p 3000:3000 --name=grafana grafana-electora
+   docker run -d -p 3000:3000 --name=grafana grafana-electora:11.5.2
    ```
 
-4. Test image
+4. Check if patch is applied
 
+   ```shell
+   docker exec -it grafana ls -lrt public/app/features/canvas/elements/electora
+   docker exec -it grafana cat public/app/features/canvas/registry.ts
+   docker exec -it grafana cat public/app/features/canvas/runtime/element.tsx
+   ```
 
+   ```shell
+   docker exec -it grafana bash
+   ```
+   
 ## Maintain canvas custom elements
 
 ### Eigenes Git-Repo
